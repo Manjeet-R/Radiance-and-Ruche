@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Radiance & Ruche - Premium Women's Fashion Affiliate Store. Discover curated dresses, sarees, jewelry, beauty & more.">
+    <meta name="keywords" content="women fashion, dresses, sarees, jewelry, beauty, affiliate store, luxury fashion">
+    <meta property="og:title" content="Radiance & Ruche | Premium Women's Fashion">
+    <meta property="og:description" content="Curated fashion, beauty & accessories. Shop through our affiliate partners.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Radiance & Ruche | Premium Women's Fashion">
+    <link rel="canonical" href="https://radianceandruche.com">
+    <title>Radiance & Ruche | Premium Women's Fashion Affiliate Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Header -->
+    <nav class="top-nav" id="topNav">
+        <div class="nav-inner">
+            <a href="#" class="brand-logo">Radiance & Ruche</a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="active">Home</a>
+                <a href="#trending">Trending</a>
+                <a href="#categories">Categories</a>
+                <a href="#deals">Deals</a>
+                <a href="#collections">Collections</a>
+                <a href="#blog">Blog</a>
+                <a href="/admin.html">Admin</a>
+            </div>
+            <div class="nav-actions"> 
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="icon-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge-dot" id="wishlistBadge" style="display:none;"></span>
+                </button>
+                <button class="icon-btn" id="userBtn" aria-label="User account">
+                    <i class="fas fa-user"></i>
+                </button>
+             </div>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div class="modal-overlay" id="searchModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeSearchModal">&times;</button>
+            <h3 style="margin-bottom:16px;">Search Products</h3>
+            <input type="text" id="searchInput" placeholder="Search dresses, sarees, jewelry..." style="width:100%;padding:14px;border-radius:50px;border:1px solid var(--border-card);background:var(--bg-card);color:var(--text-primary);font-size:0.95rem;outline:none;">
+            <div id="searchResults" style="margin-top:16px;max-height:350px;overflow-y:auto;"></div>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeUserModal">&times;</button>
+            <div id="userModalContent">
+                <h3 style="margin-bottom:16px;">Welcome</h3>
+                <p style="color:var(--text-muted);margin-bottom:20px;">Sign in to save favorites & get deal alerts.</p>
+                <button class="btn-gold" id="googleSignInBtn" style="width:100%;justify-content:center;">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+                <div id="userDashboard" style="display:none;margin-top:20px;">
+                    <p style="font-weight:600;">My Dashboard</p>
+                    <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+                        <a href="#" class="btn-outline" style="text-align:center;">❤️ Wishlist</a>
+                        <a href="#" class="btn-outline" style="text-align:center;">🕐 Recently Viewed</a>
+                        <a href="#" class="btn-outline" style="text-align:center;">⚙️ Preferences</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content" style="max-width:650px;padding:0;overflow:hidden;">
+            <button class="modal-close" id="closeProductModal" style="top:8px;right:8px;z-index:5;background:rgba(0,0,0,0.5);color:#fff;">&times;</button>
+            <div id="productDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Slider -->
+        <section class="hero-slider" id="heroSlider">
+            <div class="hero-slide active">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&q=80" alt="Fashion Banner" loading="eager">
+                <div class="hero-overlay">
+                    <h2>Summer Elegance 2026</h2>
+                    <p>Discover curated styles that define modern femininity.</p>
+                    <div class="hero-cta-group">
+                        <button class="btn-gold">Shop Now</button>
+                        <button class="btn-outline" style="color:#fff;border-color:#fff;">Trending Products</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=80" alt="Wedding Collection" loading="lazy">
+                <div class="hero-overlay">
+                    <h2>Wedding Season Glam</h2>
+                    <p>Stunning sarees, lehengas & jewelry for your special day.</p>
+                    <div class="hero-cta-group">
+                        <button class="btn-gold">Explore Collection</button>
+                        <button class="btn-outline" style="color:#fff;border-color:#fff;">Best Deals</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide">
+                <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=1400&q=80" alt="Party Wear" loading="lazy">
+                <div class="hero-overlay">
+                    <h2>Party Perfect Looks</h2>
+                    <p>Stand out with our handpicked party wear collection.</p>
+                    <div class="hero-cta-group">
+                        <button class="btn-gold">View All</button>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-arrow prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-arrow next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </section>
+
+        <!-- Categories -->
+        <section class="section-container" id="categories">
+            <div class="section-header">
+                <h2>Shop by Category</h2>
+                <div class="divider-gold"></div>
+                <p>Find exactly what you're looking for</p>
+            </div>
+            <div class="category-grid" id="categoryGrid"></div>
+        </section>
+
+        <!-- Trending Products -->
+        <section class="section-container" id="trending">
+            <div class="section-header">
+                <h2>Trending Now</h2>
+                <div class="divider-gold"></div>
+                <p>Most loved products this week</p>
+            </div>
+            <div class="product-grid" id="trendingProducts"></div>
+        </section>
+
+        <!-- Deal of the Day -->
+        <section class="section-container" id="deals">
+            <div class="deal-banner">
+                <h2>⚡ Deal of the Day</h2>
+                <p style="font-size:1.1rem;margin-bottom:8px;">Up to 70% off on Premium Handbags</p>
+                <p class="timer" id="dealTimer">04:32:18</p>
+                <button class="btn-gold" style="margin-top:16px;">Grab the Deal</button>
+            </div>
+        </section>
+
+        <!-- Featured Collections -->
+        <section class="section-container" id="collections">
+            <div class="section-header">
+                <h2>Featured Collections</h2>
+                <div class="divider-gold"></div>
+            </div>
+            <div class="product-grid" id="featuredCollections"></div>
+        </section>
+
+        <!-- Popular Brands -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2>Popular Brands</h2>
+                <div class="divider-gold"></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;" id="brandList">
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">H&M</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Zara</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">MANGO</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Forever 21</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Lakmé</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Maybelline</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Biba</span>
+                <span class="glass-card" style="padding:16px 24px;font-weight:600;">W</span>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="section-container">
+            <div class="newsletter-section">
+                <h2 style="font-family:'Playfair Display',serif;">Join the Radiance Club</h2>
+                <p style="color:var(--text-muted);">Get exclusive deals, style tips & early access to sales.</p>
+                <div class="newsletter-input-group">
+                    <input type="email" placeholder="Your email address" id="newsletterEmail">
+                    <button class="btn-gold" id="newsletterBtn">Subscribe</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Radiance & Ruche</h4>
+                <p style="color:var(--text-muted);font-size:0.85rem;">Your premium destination for curated women's fashion. We connect you with the best products through trusted affiliate partners.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Blog</a>
+                <a href="#">Careers</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Affiliate Disclosure</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:hello@radianceandruche.com">hello@radianceandruche.com</a>
+                <a href="#">Support Center</a>
+                <a href="#">Partner With Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Radiance & Ruche. All rights reserved. | As an affiliate, we may earn commissions from qualifying purchases.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav">
+        <div class="nav-items">
+            <a href="#home" class="active"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="#trending"><i class="fas fa-fire"></i><span>Trending</span></a>
+            <a href="#categories"><i class="fas fa-th-large"></i><span>Shop</span></a>
+            <a href="#deals"><i class="fas fa-tag"></i><span>Deals</span></a>
+            <a href="#" id="mobileWishlist"><i class="fas fa-heart"></i><span>Saved</span></a>
+        </div>
+    </nav>
+
+    <script src="script.js">    </script>
+</body>
+</html>

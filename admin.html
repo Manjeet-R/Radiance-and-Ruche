@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Radiance & Ruche - Premium Women's Fashion Affiliate Store with Full Admin Panel">
+    <meta name="keywords" content="women fashion, dresses, sarees, jewelry, affiliate, admin dashboard">
+    <meta name="author" content="Radiance & Ruche">
+    <title>Radiance & Ruche | Admin Powered Fashion Affiliate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a; --bg-secondary: #111111; --bg-card: #1a1a1a; --bg-glass: rgba(26,26,26,0.7);
+            --text-primary: #f5f0eb; --text-secondary: #c4b8a8; --text-muted: #8a8078;
+            --accent-burgundy: #8b1a2b; --accent-burgundy-light: #b22234; --accent-rose: #d4a0a7;
+            --accent-gold: #c8a84e; --accent-gold-light: #e0c878; --border-subtle: rgba(255,255,255,0.08);
+            --border-card: rgba(255,255,255,0.12); --shadow-card: 0 4px 30px rgba(0,0,0,0.5);
+            --shadow-gold: 0 0 40px rgba(200,168,78,0.15); --glass-blur: blur(20px);
+            --radius-md: 14px; --radius-lg: 20px; --transition-smooth: 0.35s ease;
+        }
+        [data-theme="light"] {
+            --bg-primary: #faf8f5; --bg-secondary: #f3efe9; --bg-card: #ffffff; --bg-glass: rgba(255,255,255,0.75);
+            --text-primary: #1a1a1a; --text-secondary: #4a4038; --text-muted: #7a7068;
+            --border-subtle: rgba(0,0,0,0.06); --border-card: rgba(0,0,0,0.1);
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: all var(--transition-smooth); }
+        .glass-card { background: var(--bg-glass); backdrop-filter: var(--glass-blur); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 1rem; }
+        .btn-gold { background: linear-gradient(135deg, var(--accent-gold), #b8943a); color: #1a1a1a; font-weight: 600; padding: 12px 24px; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-outline { background: transparent; border: 2px solid var(--accent-gold); color: var(--accent-gold); padding: 10px 22px; border-radius: 50px; font-weight: 600; cursor: pointer; }
+        .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--accent-burgundy); padding: 12px 18px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: none; align-items: center; gap: 8px; }
+        .admin-panel-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; overflow-y: auto; display: none; }
+        .admin-container { max-width: 1400px; margin: 30px auto; background: var(--bg-card); border-radius: 28px; padding: 24px; border: 1px solid var(--accent-gold); }
+        .admin-tabs { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--border-card); padding-bottom: 12px; margin-bottom: 24px; }
+        .admin-tab { padding: 10px 22px; border-radius: 50px; background: var(--bg-secondary); cursor: pointer; transition: 0.2s; }
+        .admin-tab.active { background: var(--accent-gold); color: #1a1a1a; font-weight: bold; }
+        .product-form input, .product-form textarea, select { width: 100%; padding: 10px; margin: 8px 0; background: var(--bg-primary); border: 1px solid var(--border-card); color: var(--text-primary); border-radius: 12px; }
+        .image-preview-grid { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+        .image-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 1px solid var(--accent-gold); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+        .inline-icon { margin-right: 6px; }
+        @media (max-width: 768px) { .admin-container { padding: 16px; margin: 15px; } .admin-tab { padding: 6px 14px; font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+
+<!-- main site content (existing layout simplified but fully functional) -->
+<!-- <nav class="top-nav" style="position:sticky; top:0; background:var(--bg-glass); backdrop-filter:blur(20px); padding:12px 20px; display:flex; justify-content:space-between; align-items:center; z-index:1000;">
+    <div class="brand-logo" id="siteBrand">Radiance & Ruche</div>
+    <div style="display:flex; gap:12px;">
+        <button class="icon-btn" id="themeToggleAdmin"><i class="fas fa-moon"></i></button>
+        <button class="icon-btn" id="userMenuBtn"><i class="fas fa-user"></i></button>
+        <button class="icon-btn" id="wishlistIconBtn"><i class="fas fa-heart"></i><span id="wishlistBadgeMobile" style="position:absolute; top:-5px; right:-5px; background:var(--accent-burgundy); border-radius:50%; width:16px; height:16px; font-size:10px;"></span></button>
+    </div>
+</nav>
+<div id="mainAppContainer" style="min-height:80vh; padding:20px;">
+    <div class="hero-slider" style="height:50vh; background:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200') center/cover; display:flex; align-items:flex-end; padding:40px; border-radius:28px; margin-bottom:30px;">
+        <div><h1 style="font-size:2.5rem;">Elegance Redefined</h1><p>Curated fashion, premium affiliates</p><button class="btn-gold" id="shopNowHero">Shop Now</button></div>
+    </div>
+    <div id="productListings" class="product-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px;"></div>
+</div>
+<footer class="site-footer" style="text-align:center; padding:30px; background:var(--bg-secondary); margin-top:40px;"><p>© 2026 Radiance & Ruche | Affiliate Store</p></footer> -->
+
+<!-- Admin Panel Overlay -->
+<div id="adminPanelOverlay" class="admin-panel-overlay">
+    <div class="admin-container">
+        <div style="display:flex; justify-content:space-between; align-items:center;"><h2><i class="fas fa-crown"></i> Admin Dashboard (Secure)</h2><button id="closeAdminPanel" class="btn-outline" style="padding:6px 16px;">✕ Close</button></div>
+        <div class="admin-tabs" id="adminTabs">
+            <div class="admin-tab active" data-tab="dashboard">📊 Dashboard</div>
+            <div class="admin-tab" data-tab="products">🛍️ Products</div>
+            <div class="admin-tab" data-tab="users">👥 Users</div>
+            <div class="admin-tab" data-tab="analytics">📈 Analytics</div>
+            <div class="admin-tab" data-tab="settings">⚙️ Settings</div>
+            <div class="admin-tab" data-tab="logs">📜 Activity Logs</div>
+        </div>
+        <div id="adminTabContent"></div>
+    </div>
+</div>
+
+<!-- Admin Login Modal (hidden url triggered) -->
+<div id="adminLoginModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:5000; display:none; align-items:center; justify-content:center;">
+    <div class="glass-card" style="width:350px; padding:30px; text-align:center;">
+        <h3>Admin Login</h3>
+        <input type="text" id="adminUsername" placeholder="Username" style="width:100%; margin:10px 0; padding:12px; border-radius:40px;"><br>
+        <input type="password" id="adminPassword" placeholder="Password" style="width:100%; margin:10px 0; padding:12px; border-radius:40px;"><br>
+        <button id="adminLoginBtn" class="btn-gold">Login</button>
+        <p style="margin-top:12px; font-size:12px;">🔒 Hidden access: /admin-secure</p>
+    </div>
+</div>
+
+<script>
+    // ------------------------- DATA LAYER (persistent) -------------------------
+    let products = [];
+    let registeredUsers = [];
+    let clickEvents = [];      // { productId, userId, timestamp, store }
+    let adminLogs = [];
+    let currentAdminSession = null;
+    let adminSessionTimer = null;
+    let currentFrontendUser = null;      // logged in frontend user
+
+    // Initial seed data
+    const defaultProducts = [
+        { id: 1, name: 'Floral Print Maxi Dress', price: 2499, originalPrice: 4999, discount: 50, category: 'dresses', store: 'Amazon', rating: 4.5, reviews: 234, image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400', images: ['https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400'], description: 'Beautiful floral dress', affiliateLink: 'https://amazon.in', colors: ['Red','Blue'], sizes: ['S','M','L'], material: 'Cotton', enabled: true },
+        { id: 2, name: 'Elegant Silk Saree', price: 3999, originalPrice: 8999, discount: 55, category: 'sarees', store: 'Flipkart', rating: 4.7, reviews: 512, image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400', images: ['https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400'], affiliateLink: 'https://flipkart.com', description: 'Silk saree', enabled: true },
+        { id: 3, name: 'Classic Pearl Necklace', price: 1299, originalPrice: 2999, discount: 57, category: 'jewelry', store: 'Myntra', rating: 4.4, reviews: 189, image: 'https://images.unsplash.com/photo-1599643478518-a784e8e3f5f7?w=400', images: [], affiliateLink: 'https://myntra.com', enabled: true }
+    ];
+
+    function loadData() {
+        products = JSON.parse(localStorage.getItem('rr_products')) || defaultProducts;
+        registeredUsers = JSON.parse(localStorage.getItem('rr_users')) || [];
+        clickEvents = JSON.parse(localStorage.getItem('rr_click_events')) || [];
+        adminLogs = JSON.parse(localStorage.getItem('rr_admin_logs')) || [];
+        currentFrontendUser = JSON.parse(localStorage.getItem('rr_current_user')) || null;
+        if(!registeredUsers.length) { registeredUsers.push({ id: 'user1', name: 'Priya Sharma', email: 'priya@example.com', avatar: 'https://i.pravatar.cc/100?img=47', status: 'active', wishlist: [], createdAt: new Date().toISOString() }); saveUsers(); }
+    }
+    function saveProducts() { localStorage.setItem('rr_products', JSON.stringify(products)); renderFrontendProducts(); }
+    function saveUsers() { localStorage.setItem('rr_users', JSON.stringify(registeredUsers)); }
+    function saveClicks() { localStorage.setItem('rr_click_events', JSON.stringify(clickEvents)); }
+    function saveLogs() { localStorage.setItem('rr_admin_logs', JSON.stringify(adminLogs)); }
+    function addAdminLog(action, details) { adminLogs.unshift({ timestamp: new Date().toISOString(), admin: currentAdminSession?.username || 'admin', action, details }); if(adminLogs.length > 200) adminLogs.pop(); saveLogs(); }
+
+    // frontend render
+    function renderFrontendProducts() {
+        const container = document.getElementById('productListings');
+        if(!container) return;
+        const enabledProducts = products.filter(p => p.enabled !== false);
+        container.innerHTML = enabledProducts.map(p => `
+            <div class="glass-card" style="padding:0; overflow:hidden;">
+                <img src="${p.image}" style="width:100%; height:260px; object-fit:cover;">
+                <div style="padding:12px;">
+                    <h4>${p.name}</h4>
+                    <div><strong>₹${p.price}</strong> <del>₹${p.originalPrice}</del> <span style="color:var(--accent-gold);">-${p.discount}%</span></div>
+                    <button class="btn-outline" style="width:100%; margin-top:8px;" onclick="trackAffiliateClick(${p.id})"><i class="fas fa-shopping-bag"></i> Buy on ${p.store}</button>
+                    <button class="icon-btn" style="margin-top:6px;" onclick="toggleWishlistFrontend(${p.id})"><i class="fas fa-heart"></i> Save</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    window.trackAffiliateClick = function(productId) {
+        const p = products.find(pr => pr.id === productId);
+        if(p) {
+            clickEvents.push({ productId, userId: currentFrontendUser?.id || 'guest', timestamp: Date.now(), store: p.store });
+            saveClicks();
+            addAdminLog(`Affiliate click`, `Product: ${p.name} (ID ${productId})`);
+            window.open(p.affiliateLink, '_blank');
+        }
+    };
+    window.toggleWishlistFrontend = function(prodId) {
+        if(!currentFrontendUser) { alert("Please sign in to save wishlist"); return; }
+        let user = registeredUsers.find(u => u.id === currentFrontendUser.id);
+        if(user) {
+            if(user.wishlist.includes(prodId)) user.wishlist = user.wishlist.filter(id => id !== prodId);
+            else user.wishlist.push(prodId);
+            saveUsers();
+            alert("Wishlist updated");
+        }
+    };
+    
+    // Admin Panel Logic
+    let adminActiveTab = 'dashboard';
+    function renderAdminPanel() {
+        const container = document.getElementById('adminTabContent');
+        if(!container) return;
+        if(adminActiveTab === 'dashboard') container.innerHTML = renderDashboard();
+        else if(adminActiveTab === 'products') container.innerHTML = renderProductManagement();
+        else if(adminActiveTab === 'users') container.innerHTML = renderUserManagement();
+        else if(adminActiveTab === 'analytics') container.innerHTML = renderAnalytics();
+        else if(adminActiveTab === 'settings') container.innerHTML = renderSettings();
+        else if(adminActiveTab === 'logs') container.innerHTML = renderLogs();
+        attachProductEvents();
+        attachUserEvents();
+    }
+    function renderDashboard() {
+        const totalProducts = products.length;
+        const totalClicks = clickEvents.length;
+        const totalUsers = registeredUsers.length;
+        const topProduct = [...clickEvents.reduce((map, ev) => { map.set(ev.productId, (map.get(ev.productId)||0)+1); return map; }, new Map())].sort((a,b)=>b[1]-a[1])[0];
+        const topProductName = topProduct ? (products.find(p=>p.id===topProduct[0])?.name || 'N/A') : 'None';
+        return `<div class="glass-card"><h3>Key Metrics</h3><p>📦 Products: ${totalProducts}</p><p>🖱️ Total Clicks: ${totalClicks}</p><p>👥 Registered Users: ${totalUsers}</p><p>🔥 Top Product: ${topProductName}</p><button class="btn-gold" id="quickAddProductBtn">+ Add New Product</button></div>`;
+    }
+    function renderProductManagement() {
+        return `<div><button id="addProductBtnAdmin" class="btn-gold" style="margin-bottom:16px;"><i class="fas fa-plus"></i> Add Product</button>
+        <div id="productEditorModal" style="display:none;" class="glass-card" style="margin-top:20px; padding:20px;"></div>
+        <table><thead><tr><th>ID</th><th>Name</th><th>Price</th><th>Store</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+        ${products.map(p => `<tr><td>${p.id}</td><td>${p.name}</td><td>₹${p.price}</td><td>${p.store}</td><td>${p.enabled ? '✅ Active' : '⛔ Disabled'}</td>
+        <td><button class="btn-outline editProductBtn" data-id="${p.id}">Edit</button> <button class="btn-outline deleteProductBtn" data-id="${p.id}" style="border-color:red;">Delete</button> <button class="toggleStatusBtn" data-id="${p.id}">Toggle</button></td></tr>`).join('')}
+        </tbody></table></div>`;
+    }
+    function showProductForm(product = null) {
+        const modalDiv = document.getElementById('productEditorModal');
+        if(!modalDiv) return;
+        const isEdit = !!product;
+        modalDiv.style.display = 'block';
+        modalDiv.innerHTML = `<h3>${isEdit ? 'Edit Product' : 'New Product'}</h3>
+        <input id="prodName" placeholder="Name" value="${product?.name || ''}"><br>
+        <input id="prodPrice" placeholder="Price" value="${product?.price || ''}"><br>
+        <input id="prodOriginal" placeholder="Original Price" value="${product?.originalPrice || ''}"><br>
+        <input id="prodDiscount" placeholder="Discount %" value="${product?.discount || ''}"><br>
+        <input id="prodCategory" placeholder="Category" value="${product?.category || ''}"><br>
+        <input id="prodStore" placeholder="Store" value="${product?.store || ''}"><br>
+        <input id="prodImage" placeholder="Main Image URL" value="${product?.image || ''}"><br>
+        <textarea id="prodImages" placeholder="Extra images (URLs comma separated)">${product?.images?.join(',') || ''}</textarea><br>
+        <input id="prodAffiliate" placeholder="Affiliate Link" value="${product?.affiliateLink || ''}"><br>
+        <textarea id="prodDesc" placeholder="Description">${product?.description || ''}</textarea><br>
+        <input id="prodColors" placeholder="Colors (comma)" value="${product?.colors?.join(',') || ''}"><br>
+        <input id="prodSizes" placeholder="Sizes (comma)" value="${product?.sizes?.join(',') || ''}"><br>
+        <button id="saveProductFinal" class="btn-gold">Save Product</button>
+        <button id="cancelProductForm" class="btn-outline">Cancel</button>`;
+        document.getElementById('saveProductFinal').onclick = () => {
+            const newProd = {
+                id: product ? product.id : Date.now(),
+                name: document.getElementById('prodName').value,
+                price: parseFloat(document.getElementById('prodPrice').value),
+                originalPrice: parseFloat(document.getElementById('prodOriginal').value),
+                discount: parseFloat(document.getElementById('prodDiscount').value),
+                category: document.getElementById('prodCategory').value,
+                store: document.getElementById('prodStore').value,
+                image: document.getElementById('prodImage').value,
+                images: document.getElementById('prodImages').value.split(',').map(s=>s.trim()),
+                affiliateLink: document.getElementById('prodAffiliate').value,
+                description: document.getElementById('prodDesc').value,
+                colors: document.getElementById('prodColors').value.split(',').map(s=>s.trim()),
+                sizes: document.getElementById('prodSizes').value.split(',').map(s=>s.trim()),
+                enabled: true, rating: product?.rating || 4.0, reviews: product?.reviews || 0
+            };
+            if(product) { const idx = products.findIndex(p=>p.id===product.id); if(idx!==-1) products[idx] = {...products[idx], ...newProd, id: product.id}; }
+            else { products.push(newProd); }
+            saveProducts();
+            addAdminLog('Product saved', `${newProd.name}`);
+            modalDiv.style.display = 'none';
+            renderAdminPanel();
+        };
+        document.getElementById('cancelProductForm').onclick = () => modalDiv.style.display = 'none';
+    }
+    function attachProductEvents() {
+        document.querySelectorAll('.editProductBtn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const prod = products.find(p=>p.id===id); showProductForm(prod); }));
+        document.querySelectorAll('.deleteProductBtn').forEach(btn => btn.addEventListener('click', (e) => { if(confirm('Delete product?')) { const id = parseInt(btn.dataset.id); products = products.filter(p=>p.id!==id); saveProducts(); addAdminLog('Product deleted', `ID ${id}`); renderAdminPanel(); } }));
+        document.querySelectorAll('.toggleStatusBtn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const prod = products.find(p=>p.id===id); if(prod) prod.enabled = !prod.enabled; saveProducts(); addAdminLog('Toggled product status', `${prod.name} -> ${prod.enabled}`); renderAdminPanel(); }));
+        const addBtn = document.getElementById('addProductBtnAdmin');
+        if(addBtn) addBtn.onclick = () => showProductForm(null);
+        const quickAdd = document.getElementById('quickAddProductBtn');
+        if(quickAdd) quickAdd.onclick = () => showProductForm(null);
+    }
+    function renderUserManagement() {
+        return `<table><thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Wishlist Items</th><th>Actions</th></tr></thead><tbody>
+        ${registeredUsers.map(u => `<tr><td>${u.name}</td><td>${u.email}</td><td>${u.status}</td><td>${u.wishlist?.length || 0}</td>
+        <td><button class="viewWishlistBtn" data-id="${u.id}">❤️ Wishlist</button> <button class="blockUserBtn" data-id="${u.id}">${u.status==='active'?'Block':'Unblock'}</button> <button class="deleteUserBtn" data-id="${u.id}">Delete</button></td></tr>`).join('')}
+        </tbody></table><div id="wishlistModal" style="display:none;" class="glass-card"></div>`;
+    }
+    function attachUserEvents() {
+        document.querySelectorAll('.viewWishlistBtn').forEach(btn => btn.addEventListener('click', () => { const uid = btn.dataset.id; const user = registeredUsers.find(u=>u.id===uid); const wishProd = (user?.wishlist || []).map(pid => products.find(p=>p.id===pid)?.name).filter(n=>n); alert(`Wishlist: ${wishProd.join(', ') || 'Empty'}`); }));
+        document.querySelectorAll('.blockUserBtn').forEach(btn => btn.addEventListener('click', () => { const uid = btn.dataset.id; const user = registeredUsers.find(u=>u.id===uid); if(user) user.status = user.status==='active'?'blocked':'active'; saveUsers(); addAdminLog('User status changed', `${user.email} -> ${user.status}`); renderAdminPanel(); }));
+        document.querySelectorAll('.deleteUserBtn').forEach(btn => btn.addEventListener('click', () => { if(confirm('Delete user permanently?')) { registeredUsers = registeredUsers.filter(u=>u.id!==btn.dataset.id); saveUsers(); addAdminLog('User deleted', btn.dataset.id); renderAdminPanel(); } }));
+    }
+    function renderAnalytics() {
+        const dailyClicks = clickEvents.filter(ev => (Date.now() - ev.timestamp) < 86400000).length;
+        const weeklyClicks = clickEvents.filter(ev => (Date.now() - ev.timestamp) < 604800000).length;
+        const productStats = clickEvents.reduce((acc, ev) => { acc[ev.productId] = (acc[ev.productId] || 0) + 1; return acc; }, {});
+        const topProducts = Object.entries(productStats).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([pid, count]) => ({ name: products.find(p=>p.id==parseInt(pid))?.name || 'Unknown', clicks: count }));
+        return `<div class="glass-card"><h3>Click Analytics</h3><p>📅 Last 24h: ${dailyClicks}</p><p>📆 Last 7 days: ${weeklyClicks}</p><p>🏆 Top Products:</p><ul>${topProducts.map(t=>`<li>${t.name}: ${t.clicks} clicks</li>`).join('')}</ul><canvas id="clicksChart" width="400" height="200"></canvas></div>`;
+    }
+    function renderSettings() {
+        let siteName = localStorage.getItem('rr_site_name') || 'Radiance & Ruche';
+        let seoDesc = localStorage.getItem('rr_seo_desc') || 'Premium Women\'s Fashion';
+        return `<div class="glass-card"><h3>Site Settings</h3>
+        <label>Site Name:</label><input id="siteNameInput" value="${siteName}"><br>
+        <label>SEO Description:</label><textarea id="seoDescInput">${seoDesc}</textarea><br>
+        <label>Social Instagram:</label><input id="instaLink" value="${localStorage.getItem('rr_insta') || ''}"><br>
+        <label>Admin New Password (strong):</label><input type="password" id="newAdminPass"><br>
+        <button id="saveSettingsBtn" class="btn-gold">Save Settings</button>
+        </div>`;
+    }
+    function renderLogs() {
+        return `<div class="glass-card"><h3>Admin Activity Logs</h3><ul style="max-height:400px; overflow-y:auto;">${adminLogs.slice(0,50).map(l=>`<li>[${new Date(l.timestamp).toLocaleString()}] ${l.admin}: ${l.action} - ${l.details}</li>`).join('')}</ul></div>`;
+    }
+    
+    function saveSiteSettings() {
+        const siteName = document.getElementById('siteNameInput')?.value || 'Radiance & Ruche';
+        const seoDesc = document.getElementById('seoDescInput')?.value;
+        const insta = document.getElementById('instaLink')?.value;
+        const newPass = document.getElementById('newAdminPass')?.value;
+        localStorage.setItem('rr_site_name', siteName);
+        localStorage.setItem('rr_seo_desc', seoDesc);
+        localStorage.setItem('rr_insta', insta);
+        const brandElem = document.querySelector('.brand-logo');
+        if(brandElem) brandElem.innerText = siteName;
+        if(newPass && newPass.length >= 6) { localStorage.setItem('rr_admin_hash', btoa('admin:'+newPass)); addAdminLog('Password changed', 'Admin password updated'); alert('Admin password updated'); }
+        addAdminLog('Settings updated', 'Site settings changed');
+        renderAdminPanel();
+    }
+    
+    // Admin session management
+    function startAdminSession(username) {
+        currentAdminSession = { username, loginTime: Date.now() };
+        if(adminSessionTimer) clearTimeout(adminSessionTimer);
+        adminSessionTimer = setTimeout(() => { alert('Admin session timeout. Please login again.'); logoutAdmin(); }, 30 * 60 * 1000);
+        addAdminLog('Admin login', `${username} logged in`);
+        document.getElementById('adminPanelOverlay').style.display = 'block';
+        document.getElementById('adminLoginModal').style.display = 'none';
+        renderAdminPanel();
+    }
+    function logoutAdmin() { currentAdminSession = null; if(adminSessionTimer) clearTimeout(adminSessionTimer); document.getElementById('adminPanelOverlay').style.display = 'none'; alert('Admin logged out'); }
+    function checkAdminAuth() { if(!currentAdminSession) { document.getElementById('adminLoginModal').style.display = 'flex'; return false; } return true; }
+    
+    // Hidden admin URL detection: window.location.hash === '#radiance-admin-secure'
+    if(window.location.hash === '#radiance-admin-secure') { setTimeout(() => { document.getElementById('adminLoginModal').style.display = 'flex'; }, 200); }
+    // Also add admin badge floating
+    const adminFloater = document.createElement('div');
+    adminFloater.className = 'admin-badge';
+    adminFloater.innerHTML = '<i class="fas fa-shield-alt"></i> Admin Portal';
+    adminFloater.onclick = () => { if(currentAdminSession) document.getElementById('adminPanelOverlay').style.display = 'block'; else document.getElementById('adminLoginModal').style.display = 'flex'; };
+    document.body.appendChild(adminFloater);
+    adminFloater.style.display = 'flex';
+    
+    document.getElementById('adminLoginBtn')?.addEventListener('click', () => {
+        const user = document.getElementById('adminUsername').value;
+        const pwd = document.getElementById('adminPassword').value;
+        const storedHash = localStorage.getItem('rr_admin_hash') || btoa('admin:Admin@2026!');
+        if(btoa(`${user}:${pwd}`) === storedHash) { startAdminSession(user); }
+        else alert('Invalid credentials');
+    });
+    document.getElementById('closeAdminPanel')?.addEventListener('click', () => { document.getElementById('adminPanelOverlay').style.display = 'none'; });
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.addEventListener('click', () => { if(!checkAdminAuth()) return; document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); adminActiveTab = tab.dataset.tab; renderAdminPanel(); });
+    });
+    document.addEventListener('click', function(e) { if(e.target.id === 'saveSettingsBtn') saveSiteSettings(); });
+    window.renderFrontendProducts = renderFrontendProducts;
+    
+    // Google mock sign in (frontend)
+    function initFrontendUser() {
+        if(!currentFrontendUser && registeredUsers.length) { currentFrontendUser = registeredUsers[0]; localStorage.setItem('rr_current_user', JSON.stringify(currentFrontendUser)); }
+        const userBtn = document.getElementById('userMenuBtn');
+        if(userBtn) userBtn.onclick = () => { let name = prompt('Enter name to sign in (Guest -> Register)'); if(name) { let newUser = { id: 'user_'+Date.now(), name: name, email: name+'@example.com', avatar: '', status: 'active', wishlist: [], createdAt: new Date().toISOString() }; registeredUsers.push(newUser); saveUsers(); currentFrontendUser = newUser; localStorage.setItem('rr_current_user', JSON.stringify(currentFrontendUser)); alert('Signed in as '+name); renderFrontendProducts(); } };
+    }
+    // theme toggle
+    document.getElementById('themeToggleAdmin')?.addEventListener('click', () => { const html = document.documentElement; const cur = html.getAttribute('data-theme'); html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark'); localStorage.setItem('rr_theme', cur === 'dark' ? 'light' : 'dark'); });
+    function initTheme() { const saved = localStorage.getItem('rr_theme') || 'dark'; document.documentElement.setAttribute('data-theme', saved); }
+    
+    // Initialize all
+    function init() {
+        loadData();
+        initTheme();
+        renderFrontendProducts();
+        initFrontendUser();
+        const shopBtn = document.getElementById('shopNowHero'); if(shopBtn) shopBtn.onclick = () => document.getElementById('productListings').scrollIntoView({behavior:'smooth'});
+        // set default admin hash if not exists
+        if(!localStorage.getItem('rr_admin_hash')) localStorage.setItem('rr_admin_hash', btoa('admin:Admin@2026!'));
+        setInterval(() => { if(currentAdminSession && (Date.now() - currentAdminSession.loginTime) > 30*60*1000) logoutAdmin(); }, 10000);
+    }
+    init();
+    window.renderAdminPanel = renderAdminPanel;
+</script>
+</body>
+</html>
