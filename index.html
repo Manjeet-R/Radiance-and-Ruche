@@ -3,41 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Radiance & Ruche - Premium Women's Fashion Affiliate Store. Discover curated dresses, sarees, jewelry, beauty & more.">
+    <meta name="description" content="Radiance & Ruche — Premium Women's Fashion. Up to 70% off on dresses, sarees, jewelry & more. Limited time deals.">
     <meta name="keywords" content="women fashion, dresses, sarees, jewelry, beauty, affiliate store, luxury fashion">
-    <meta property="og:title" content="Radiance & Ruche | Premium Women's Fashion">
-    <meta property="og:description" content="Curated fashion, beauty & accessories. Shop through our affiliate partners.">
+    <meta property="og:title" content="Radiance & Ruche | Premium Women's Fashion — Up to 70% Off">
+    <meta property="og:description" content="Curated fashion, beauty & accessories at unbeatable prices. Shop now before deals expire.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Radiance & Ruche | Premium Women's Fashion">
-    <link rel="canonical" href="https://radianceandruche.com">
-    <title>Radiance & Ruche | Premium Women's Fashion Affiliate Store</title>
+    <title>Radiance & Ruche | Premium Women's Fashion — Up to 70% Off</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-    </style>
+<style>
+/* ── Announcement bar ── */
+.announce-bar{background:linear-gradient(90deg,var(--accent-burgundy),#a01f30,var(--accent-burgundy));color:#fff;text-align:center;padding:9px 16px;font-size:.8rem;font-weight:600;letter-spacing:.3px;position:relative;z-index:1001;}
+.announce-bar span{color:var(--accent-gold-light);}
+.announce-bar .close-announce{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:.9rem;}
+
+/* ── Social proof ticker ── */
+.social-proof-bar{background:var(--bg-secondary);border-bottom:1px solid var(--border-subtle);padding:7px 0;overflow:hidden;white-space:nowrap;}
+.social-proof-track{display:inline-flex;gap:40px;animation:tickerScroll 28s linear infinite;}
+.social-proof-track:hover{animation-play-state:paused;}
+.proof-item{display:inline-flex;align-items:center;gap:7px;font-size:.75rem;color:var(--text-secondary);flex-shrink:0;}
+.proof-item i{color:var(--accent-gold);}
+@keyframes tickerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── Sticky CTA bar ── */
+#stickyCta{position:fixed;bottom:0;left:0;right:0;z-index:998;background:linear-gradient(135deg,var(--accent-burgundy),#a01f30);color:#fff;padding:13px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,.4);}
+#stickyCta .cta-text{font-size:.88rem;font-weight:600;}
+#stickyCta .cta-text span{color:var(--accent-gold-light);}
+#stickyCta .cta-btn{background:var(--accent-gold);color:#1a1a1a;border:none;padding:10px 22px;border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;transition:.2s;}
+#stickyCta .cta-btn:hover{transform:scale(1.04);}
+#stickyCta .cta-close{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:1rem;padding:4px;}
+
+/* ── Exit-intent popup ── */
+#exitModal{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;}
+#exitModal.show{display:flex;}
+.exit-box{background:var(--bg-card);border:2px solid var(--accent-gold);border-radius:24px;padding:36px 32px;max-width:440px;width:90%;text-align:center;position:relative;animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes popIn{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+.exit-box .exit-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--text-muted);font-size:1.2rem;cursor:pointer;}
+.exit-box h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:8px;background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.exit-box p{color:var(--text-secondary);font-size:.9rem;margin-bottom:18px;}
+.exit-coupon{background:var(--bg-secondary);border:2px dashed var(--accent-gold);border-radius:12px;padding:10px 18px;font-size:1.2rem;font-weight:700;color:var(--accent-gold);letter-spacing:3px;margin-bottom:18px;cursor:pointer;transition:.2s;}
+.exit-coupon:hover{background:var(--accent-gold);color:#1a1a1a;}
+
+/* ── Flash sale ribbon ── */
+.flash-ribbon{display:inline-flex;align-items:center;gap:6px;background:var(--accent-burgundy);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;animation:flashPulse 1.6s ease-in-out infinite;}
+@keyframes flashPulse{0%,100%{opacity:1;}50%{opacity:.7;}}
+
+/* ── Enhanced product card ── */
+.product-card{position:relative;}
+.product-card .quick-view-btn{position:absolute;bottom:52px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid var(--border-card);color:#fff;padding:8px 18px;border-radius:50px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;opacity:0;transition:all .3s;pointer-events:none;z-index:3;}
+.product-card:hover .quick-view-btn{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all;}
+.product-card .buy-now-strip{display:block;width:100%;padding:11px;background:linear-gradient(135deg,var(--accent-gold),#b8943a);color:#1a1a1a;font-weight:700;font-size:.82rem;border:none;cursor:pointer;text-align:center;transition:all .3s;letter-spacing:.3px;}
+.product-card .buy-now-strip:hover{background:linear-gradient(135deg,#d4b45a,var(--accent-gold));box-shadow:0 4px 18px rgba(200,168,78,.45);}
+.product-card .buy-now-strip i{margin-right:5px;}
+.stock-badge{position:absolute;bottom:48px;left:10px;z-index:2;background:rgba(0,0,0,.8);color:#ff9944;font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:50px;border:1px solid rgba(255,153,68,.4);}
+.viewed-badge{position:absolute;top:46px;left:12px;z-index:2;background:rgba(0,0,0,.7);color:var(--accent-gold-light);font-size:.63rem;font-weight:600;padding:2px 7px;border-radius:50px;}
+.rating-row{display:flex;align-items:center;gap:5px;margin-bottom:7px;}
+.stars{color:var(--accent-gold);font-size:.72rem;}
+.review-count{font-size:.7rem;color:var(--text-muted);}
+
+/* ── Product card price ── */
+.savings-tag{font-size:.7rem;background:var(--accent-burgundy);color:#fff;padding:2px 8px;border-radius:50px;font-weight:600;}
+
+/* ── Trust badges ── */
+.trust-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;padding:28px 20px;background:var(--bg-secondary);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-secondary);}
+.trust-item i{font-size:1.1rem;color:var(--accent-gold);}
+
+/* ── Urgency timer in deals ── */
+.deal-timer-blocks{display:flex;justify-content:center;gap:10px;margin:12px 0 20px;}
+.timer-block{background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;min-width:64px;text-align:center;}
+.timer-num{font-size:1.8rem;font-weight:700;line-height:1;color:var(--accent-gold-light);}
+.timer-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-top:3px;}
+
+/* ── Recently viewed ── */
+.rv-strip{padding:32px 20px;max-width:1300px;margin:0 auto;}
+.rv-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;}
+.rv-scroll::-webkit-scrollbar{height:4px;}
+.rv-scroll::-webkit-scrollbar-thumb{background:var(--border-card);border-radius:2px;}
+.rv-card{flex-shrink:0;width:140px;scroll-snap-align:start;cursor:pointer;}
+.rv-card img{width:100%;height:170px;object-fit:cover;border-radius:12px;border:1px solid var(--border-subtle);}
+.rv-card p{font-size:.72rem;margin-top:5px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rv-card strong{font-size:.78rem;color:var(--accent-gold);}
+
+/* ── Wishlist sidebar ── */
+#wishlistPanel{position:fixed;right:-380px;top:0;width:360px;height:100vh;background:var(--bg-card);border-left:1px solid var(--border-card);z-index:2500;transition:right .35s ease;overflow-y:auto;box-shadow:-8px 0 40px rgba(0,0,0,.4);}
+#wishlistPanel.open{right:0;}
+.wl-head{padding:18px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between;}
+.wl-head h3{font-size:1rem;font-weight:700;}
+.wl-close{background:none;border:none;color:var(--text-muted);font-size:1.1rem;cursor:pointer;}
+.wl-item{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border-subtle);align-items:center;}
+.wl-item img{width:56px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+.wl-info{flex:1;min-width:0;}
+.wl-info p{font-size:.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wl-info span{font-size:.78rem;color:var(--accent-gold);}
+.wl-buy{background:var(--accent-gold);color:#1a1a1a;border:none;padding:6px 14px;border-radius:50px;font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s;}
+.wl-buy:hover{transform:scale(1.04);}
+
+/* ── Live activity pop ── */
+#liveActivity{position:fixed;bottom:80px;left:20px;z-index:997;background:var(--bg-card);border:1px solid var(--border-card);border-radius:14px;padding:12px 16px;max-width:260px;box-shadow:var(--shadow-card);display:none;animation:slideInLeft .4s ease;}
+@keyframes slideInLeft{from{transform:translateX(-120%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+#liveActivity .la-text{font-size:.78rem;color:var(--text-secondary);}
+#liveActivity .la-text strong{color:var(--text-primary);}
+#liveActivity .la-dot{width:8px;height:8px;border-radius:50%;background:var(--green, #27a85e);display:inline-block;margin-right:6px;animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+
+/* ── Floating wishlist count ── */
+#floatingWl{position:fixed;right:18px;bottom:90px;z-index:996;background:var(--accent-burgundy);color:#fff;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 18px rgba(139,26,43,.45);transition:.2s;}
+#floatingWl:hover{transform:scale(1.1);}
+#floatingWl .fl-badge{position:absolute;top:-4px;right:-4px;background:var(--accent-gold);color:#1a1a1a;width:18px;height:18px;border-radius:50%;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+
+/* ── Bestseller / New badge variants ── */
+.badge-bestseller{background:linear-gradient(135deg,#c8a84e,#b8943a)!important;color:#1a1a1a!important;}
+.badge-new{background:linear-gradient(135deg,#27a85e,#1e7a4a)!important;}
+
+/* ── Overlay on mobile ── */
+#wishlistOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2499;display:none;}
+#wishlistOverlay.show{display:block;}
+
+@media(max-width:768px){
+  .trust-strip{gap:14px;}
+  #stickyCta .cta-text{font-size:.78rem;}
+  .deal-timer-blocks{gap:6px;}
+  .timer-block{min-width:52px;padding:8px 10px;}
+  .timer-num{font-size:1.4rem;}
+}
+</style>
 </head>
 <body>
 
     <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader-spinner"></div>
-    </div>
+    <div class="loading-screen" id="loadingScreen"><div class="loader-spinner"></div></div>
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <!-- Live Activity Popup -->
+    <div id="liveActivity">
+        <span class="la-dot"></span>
+        <span class="la-text" id="laText"><strong>Anjali</strong> just saved this to wishlist</span>
+    </div>
+
+    <!-- Floating Wishlist Button -->
+    <div id="floatingWl" onclick="openWishlistPanel()" role="button" tabindex="0" aria-label="Open wishlist">
+        <i class="fas fa-heart"></i>
+        <span class="fl-badge" id="flBadge">0</span>
+    </div>
+
+    <!-- Wishlist overlay -->
+    <div id="wishlistOverlay" onclick="closeWishlistPanel()"></div>
+
+    <!-- ===== WISHLIST PANEL ===== -->
+    <div id="wishlistPanel" role="dialog" aria-label="My Wishlist" aria-modal="true">
+
+        <!-- Header -->
+        <div class="wlp-header">
+            <div class="wlp-title">
+                <i class="fas fa-heart"></i>
+                <span>My Wishlist</span>
+                <span class="wlp-count-badge" id="wlpCount">0</span>
+            </div>
+            <div class="wlp-header-actions">
+                <button class="wlp-hbtn" id="wlShareBtn" title="Share Wishlist" onclick="shareWishlist()">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="wlp-hbtn" id="wlViewPageBtn" title="Full Page View" onclick="openWishlistPage()">
+                    <i class="fas fa-expand-alt"></i>
+                </button>
+                <button class="wlp-hbtn wlp-close-btn" onclick="closeWishlistPanel()" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="wlp-toolbar" id="wlpToolbar">
+            <div class="wlp-sort">
+                <label for="wlSort"><i class="fas fa-sort-amount-down"></i></label>
+                <select id="wlSort" onchange="renderWishlistPanel()">
+                    <option value="added">Recently Added</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="discount">Best Discount</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </div>
+            <button class="wlp-clear-btn" onclick="clearWishlist()">
+                <i class="fas fa-trash-alt"></i> Clear All
+            </button>
+        </div>
+
+        <!-- Items -->
+        <div class="wlp-body" id="wishlistItems"></div>
+
+        <!-- Footer -->
+        <div class="wlp-footer" id="wlpFooter" style="display:none;">
+            <div class="wlp-total">
+                <span>Total value</span>
+                <strong id="wlpTotal">₹0</strong>
+            </div>
+            <button class="wlp-buy-all-btn" onclick="buyAllWishlist()">
+                <i class="fas fa-shopping-bag"></i> Buy All Items
+            </button>
+        </div>
+
+    </div>
+
+    <!-- ===== WISHLIST FULL PAGE MODAL ===== -->
+    <div id="wishlistPage" role="dialog" aria-label="Wishlist Page" aria-modal="true">
+        <div class="wlpage-inner">
+            <div class="wlpage-header">
+                <div>
+                    <h2 class="wlpage-title"><i class="fas fa-heart"></i> My Wishlist</h2>
+                    <p class="wlpage-sub" id="wlpageCount">0 items saved</p>
+                </div>
+                <div class="wlpage-actions">
+                    <button class="wlp-hbtn" onclick="shareWishlist()" title="Share"><i class="fas fa-share-alt"></i> Share</button>
+                    <button class="wlp-hbtn" onclick="closeWishlistPage()" aria-label="Close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="wlpage-grid" id="wlpageGrid"></div>
+            <div class="wlpage-empty" id="wlpageEmpty" style="display:none;">
+                <div class="wlpe-icon"><i class="fas fa-heart-broken"></i></div>
+                <h3>Your wishlist is empty</h3>
+                <p>Browse our collection and save items you love.</p>
+                <button class="btn-gold" onclick="closeWishlistPage();document.getElementById('trending').scrollIntoView({behavior:'smooth'})">
+                    <i class="fas fa-shopping-bag"></i> Start Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Wishlist Modal -->
+    <div class="modal-overlay" id="shareWlModal">
+        <div class="modal-content" style="max-width:420px;">
+            <button class="modal-close" onclick="document.getElementById('shareWlModal').classList.remove('open')">&times;</button>
+            <h3 style="margin-bottom:6px;font-family:'Playfair Display',serif;"><i class="fas fa-share-alt" style="color:var(--accent-gold);margin-right:8px;"></i>Share Wishlist</h3>
+            <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:18px;">Copy the link below to share your saved items.</p>
+            <div class="share-link-box">
+                <input type="text" id="shareWlLink" readonly>
+                <button onclick="copyShareLink()"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="share-socials">
+                <button onclick="shareVia('whatsapp')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button onclick="shareVia('instagram')"><i class="fab fa-instagram"></i> Instagram</button>
+                <button onclick="shareVia('copy')"><i class="fas fa-link"></i> Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky CTA Bar -->
+    <div id="stickyCta">
+        <div class="cta-text">🔥 Flash Sale ends in <span id="stickyTimer">--:--</span> — <span>Up to 70% Off!</span></div>
+        <button class="cta-btn" onclick="document.getElementById('trending').scrollIntoView({behavior:'smooth'});hideStickyOnce();">Shop Now</button>
+        <button class="cta-close" onclick="hideStickyOnce()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Exit-Intent Modal -->
+    <div id="exitModal">
+        <div class="exit-box">
+            <button class="exit-close" onclick="document.getElementById('exitModal').classList.remove('show')"><i class="fas fa-times"></i></button>
+            <div style="font-size:2rem;margin-bottom:8px;">🎁</div>
+            <h3>Wait! Before You Go…</h3>
+            <p>Grab an exclusive <strong style="color:var(--accent-gold);">extra 10% off</strong> on your first purchase. Use code:</p>
+            <div class="exit-coupon" onclick="copyExitCode(this)">RUCHE10 <i class="fas fa-copy" style="font-size:.75rem;"></i></div>
+            <button class="btn-gold" style="width:100%;justify-content:center;" onclick="document.getElementById('exitModal').classList.remove('show');document.getElementById('trending').scrollIntoView({behavior:'smooth'});">
+                <i class="fas fa-bolt"></i> Claim My Discount
+            </button>
+            <p style="font-size:.72rem;color:var(--text-muted);margin-top:10px;">Valid for 24 hours only. Limited stock.</p>
+        </div>
+    </div>
+
+    <!-- Announcement Bar -->
+    <div class="announce-bar" id="announceBar">
+        🚚 FREE Delivery on orders above ₹999 &nbsp;|&nbsp; <span>Today's Deal: Flat 55% off on Sarees</span> &nbsp;|&nbsp; Use code <span>RUCHE10</span> for extra 10% off
+        <button class="close-announce" onclick="document.getElementById('announceBar').style.display='none'"><i class="fas fa-times"></i></button>
+    </div>
+
     <!-- Header -->
     <nav class="top-nav" id="topNav">
         <div class="nav-inner">
-            <a href="#" class="brand-logo">Radiance & Ruche</a>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <a href="#" class="brand-logo">Radiance &amp; Ruche</a>
             <div class="nav-links" id="navLinks">
                 <a href="#home" class="active">Home</a>
                 <a href="#trending">Trending</a>
@@ -45,33 +294,79 @@
                 <a href="#deals">Deals</a>
                 <a href="#collections">Collections</a>
                 <a href="#blog">Blog</a>
-                <a href="/admin.html">Admin</a>
+                <a href="admin.html" style="color:var(--accent-gold);">Admin</a>
             </div>
-            <div class="nav-actions"> 
-                <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Dark/Light Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="icon-btn" id="searchToggle" aria-label="Search">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+                <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fas fa-search"></i></button>
+                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist" onclick="openWishlistPanel()">
                     <i class="fas fa-heart"></i>
                     <span class="badge-dot" id="wishlistBadge" style="display:none;"></span>
                 </button>
-                <button class="icon-btn" id="userBtn" aria-label="User account">
-                    <i class="fas fa-user"></i>
-                </button>
-             </div>
+                <button class="icon-btn" id="userBtn" aria-label="User account"><i class="fas fa-user"></i></button>
+                <button class="icon-btn mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
     </nav>
 
-    <!-- Search Modal -->
-    <div class="modal-overlay" id="searchModal">
-        <div class="modal-content">
-            <button class="modal-close" id="closeSearchModal">&times;</button>
-            <h3 style="margin-bottom:16px;">Search Products</h3>
-            <input type="text" id="searchInput" placeholder="Search dresses, sarees, jewelry..." style="width:100%;padding:14px;border-radius:50px;border:1px solid var(--border-card);background:var(--bg-card);color:var(--text-primary);font-size:0.95rem;outline:none;">
-            <div id="searchResults" style="margin-top:16px;max-height:350px;overflow-y:auto;"></div>
+    <!-- Mobile Drawer (right side) -->
+    <div id="mobileDrawerOverlay" onclick="closeMobileDrawer()"></div>
+    <div id="mobileDrawer" role="dialog" aria-label="Navigation menu">
+        <div class="drawer-header">
+            <div class="drawer-brand">Radiance &amp; Ruche</div>
+            <button class="drawer-close" id="mobileMenuClose" onclick="closeMobileDrawer()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="#home" class="drawer-link active"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="#trending" class="drawer-link"><i class="fas fa-fire"></i><span>Trending</span></a>
+            <a href="#categories" class="drawer-link"><i class="fas fa-th-large"></i><span>Categories</span></a>
+            <a href="#deals" class="drawer-link"><i class="fas fa-tag"></i><span>Deals</span></a>
+            <a href="#collections" class="drawer-link"><i class="fas fa-layer-group"></i><span>Collections</span></a>
+            <a href="#blog" class="drawer-link"><i class="fas fa-blog"></i><span>Blog</span></a>
+            <a href="admin.html" class="drawer-link drawer-link-admin"><i class="fas fa-lock"></i><span>Admin Panel</span></a>
+        </nav>
+        <div class="drawer-footer">
+            <button class="drawer-icon-btn" id="drawerThemeBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i> Toggle Theme</button>
+        </div>
+    </div>
+
+    <!-- ===== ADVANCED SEARCH MODAL ===== -->
+    <div class="srch-overlay" id="searchModal" role="dialog" aria-label="Search" aria-modal="true">
+        <div class="srch-panel" id="searchPanel">
+
+            <!-- Header -->
+            <div class="srch-header">
+                <div class="srch-input-wrap">
+                    <i class="fas fa-search srch-icon-left"></i>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        class="srch-input"
+                        placeholder="Search dresses, sarees, jewelry…"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="Search products"
+                        aria-autocomplete="list"
+                        aria-controls="srchResults"
+                        role="combobox"
+                        aria-expanded="false"
+                    >
+                    <button class="srch-clear" id="srchClear" title="Clear" style="display:none;" aria-label="Clear search">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+                <button class="srch-close-btn" id="closeSearchModal" aria-label="Close search">
+                    <i class="fas fa-times"></i> <span>Esc</span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="srch-body" id="srchResults" role="listbox">
+                <!-- Populated by JS -->
+            </div>
+
         </div>
     </div>
 
@@ -79,65 +374,58 @@
     <div class="modal-overlay" id="userModal">
         <div class="modal-content">
             <button class="modal-close" id="closeUserModal">&times;</button>
-            <div id="userModalContent">
-                <h3 style="margin-bottom:16px;">Welcome</h3>
-                <p style="color:var(--text-muted);margin-bottom:20px;">Sign in to save favorites & get deal alerts.</p>
-                <button class="btn-gold" id="googleSignInBtn" style="width:100%;justify-content:center;">
-                    <i class="fab fa-google"></i> Sign in with Google
-                </button>
-                <div id="userDashboard" style="display:none;margin-top:20px;">
-                    <p style="font-weight:600;">My Dashboard</p>
-                    <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-                        <a href="#" class="btn-outline" style="text-align:center;">❤️ Wishlist</a>
-                        <a href="#" class="btn-outline" style="text-align:center;">🕐 Recently Viewed</a>
-                        <a href="#" class="btn-outline" style="text-align:center;">⚙️ Preferences</a>
-                    </div>
-                </div>
-            </div>
+            <div id="userModalContent"></div>
         </div>
     </div>
 
     <!-- Product Detail Modal -->
-    <div class="modal-overlay" id="productModal">
-        <div class="modal-content" style="max-width:650px;padding:0;overflow:hidden;">
-            <button class="modal-close" id="closeProductModal" style="top:8px;right:8px;z-index:5;background:rgba(0,0,0,0.5);color:#fff;">&times;</button>
-            <div id="productDetailContent"></div>
+    <div class="modal-overlay" id="productModal" role="dialog" aria-modal="true" aria-label="Product detail">
+        <div class="pdm" id="productDetailContent">
+            <!-- filled by JS -->
         </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Social Proof Ticker -->
+    <div class="social-proof-bar">
+        <div class="social-proof-track" id="proofTrack"></div>
+    </div>
+
     <main>
         <!-- Hero Slider -->
         <section class="hero-slider" id="heroSlider">
             <div class="hero-slide active">
                 <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&q=80" alt="Fashion Banner" loading="eager">
                 <div class="hero-overlay">
-                    <h2>Summer Elegance 2026</h2>
+                    <div class="flash-ribbon"><i class="fas fa-bolt"></i> Flash Sale — Ends Today</div>
+                    <h2 style="margin-top:10px;">Summer Elegance 2026</h2>
                     <p>Discover curated styles that define modern femininity.</p>
                     <div class="hero-cta-group">
-                        <button class="btn-gold">Shop Now</button>
-                        <button class="btn-outline" style="color:#fff;border-color:#fff;">Trending Products</button>
+                        <button class="btn-gold" onclick="document.getElementById('trending').scrollIntoView({behavior:'smooth'})"><i class="fas fa-shopping-bag"></i> Shop Now</button>
+                        <button class="btn-outline" style="color:#fff;border-color:#fff;" onclick="document.getElementById('deals').scrollIntoView({behavior:'smooth'})">⚡ Today's Deals</button>
                     </div>
+                    <p style="font-size:.72rem;color:rgba(255,255,255,.65);margin-top:10px;"><i class="fas fa-users"></i> <span id="heroViewers">2,841</span> people shopping right now</p>
                 </div>
             </div>
             <div class="hero-slide">
                 <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=80" alt="Wedding Collection" loading="lazy">
                 <div class="hero-overlay">
-                    <h2>Wedding Season Glam</h2>
-                    <p>Stunning sarees, lehengas & jewelry for your special day.</p>
+                    <div class="flash-ribbon"><i class="fas fa-star"></i> Wedding Season Picks</div>
+                    <h2 style="margin-top:10px;">Wedding Season Glam</h2>
+                    <p>Stunning sarees, lehengas &amp; jewelry for your special day.</p>
                     <div class="hero-cta-group">
-                        <button class="btn-gold">Explore Collection</button>
-                        <button class="btn-outline" style="color:#fff;border-color:#fff;">Best Deals</button>
+                        <button class="btn-gold" onclick="window.filterByCategory('sarees')"><i class="fas fa-crown"></i> Explore Collection</button>
+                        <button class="btn-outline" style="color:#fff;border-color:#fff;" onclick="document.getElementById('deals').scrollIntoView({behavior:'smooth'})">Best Deals</button>
                     </div>
                 </div>
             </div>
             <div class="hero-slide">
                 <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=1400&q=80" alt="Party Wear" loading="lazy">
                 <div class="hero-overlay">
-                    <h2>Party Perfect Looks</h2>
+                    <div class="flash-ribbon"><i class="fas fa-fire"></i> Trending This Week</div>
+                    <h2 style="margin-top:10px;">Party Perfect Looks</h2>
                     <p>Stand out with our handpicked party wear collection.</p>
                     <div class="hero-cta-group">
-                        <button class="btn-gold">View All</button>
+                        <button class="btn-gold" onclick="document.getElementById('trending').scrollIntoView({behavior:'smooth'})"><i class="fas fa-bolt"></i> View All</button>
                     </div>
                 </div>
             </div>
@@ -145,6 +433,16 @@
             <button class="slider-arrow next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
             <div class="slider-dots" id="sliderDots"></div>
         </section>
+
+        <!-- Trust Strip -->
+        <div class="trust-strip">
+            <div class="trust-item"><i class="fas fa-truck"></i> Free Delivery above ₹999</div>
+            <div class="trust-item"><i class="fas fa-undo"></i> Easy 30-Day Returns</div>
+            <div class="trust-item"><i class="fas fa-shield-alt"></i> 100% Authentic Products</div>
+            <div class="trust-item"><i class="fas fa-lock"></i> Secure Payments</div>
+            <div class="trust-item"><i class="fas fa-star"></i> 4.8★ Avg. Rating</div>
+            <div class="trust-item"><i class="fas fa-users"></i> 50,000+ Happy Shoppers</div>
+        </div>
 
         <!-- Categories -->
         <section class="section-container" id="categories">
@@ -161,18 +459,35 @@
             <div class="section-header">
                 <h2>Trending Now</h2>
                 <div class="divider-gold"></div>
-                <p>Most loved products this week</p>
+                <p>Most loved products this week — selling fast!</p>
+            </div>
+            <!-- Filter tabs -->
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:22px;" id="filterTabs">
+                <button class="btn-filter active" data-cat="">All</button>
+                <button class="btn-filter" data-cat="beauty">Beauty</button>
             </div>
             <div class="product-grid" id="trendingProducts"></div>
+            <div style="text-align:center;margin-top:28px;">
+                <button class="btn-outline" id="loadMoreBtn" onclick="loadMoreProducts()"><i class="fas fa-plus"></i> Load More Products</button>
+            </div>
         </section>
 
         <!-- Deal of the Day -->
         <section class="section-container" id="deals">
             <div class="deal-banner">
+                <div class="flash-ribbon" style="margin:0 auto 14px;display:inline-flex;"><i class="fas fa-bolt"></i> Limited Time Offer</div>
                 <h2>⚡ Deal of the Day</h2>
-                <p style="font-size:1.1rem;margin-bottom:8px;">Up to 70% off on Premium Handbags</p>
-                <p class="timer" id="dealTimer">04:32:18</p>
-                <button class="btn-gold" style="margin-top:16px;">Grab the Deal</button>
+                <p style="font-size:1.05rem;margin:8px 0 4px;opacity:.9;">Up to <strong style="color:var(--accent-gold-light);font-size:1.3rem;">70% OFF</strong> on Premium Handbags &amp; Sarees</p>
+                <p style="font-size:.82rem;opacity:.7;margin-bottom:14px;">Hurry — deal expires when timer hits zero!</p>
+                <div class="deal-timer-blocks">
+                    <div class="timer-block"><div class="timer-num" id="dealH">00</div><div class="timer-lbl">Hours</div></div>
+                    <div class="timer-block"><div class="timer-num" id="dealM">00</div><div class="timer-lbl">Mins</div></div>
+                    <div class="timer-block"><div class="timer-num" id="dealS">00</div><div class="timer-lbl">Secs</div></div>
+                </div>
+                <button class="btn-gold" style="font-size:1rem;padding:14px 36px;" onclick="document.getElementById('trending').scrollIntoView({behavior:'smooth'})">
+                    <i class="fas fa-shopping-bag"></i> Grab the Deal Now
+                </button>
+                <p style="font-size:.72rem;opacity:.6;margin-top:10px;"><i class="fas fa-eye"></i> <span id="dealWatchers">143</span> people viewing this right now</p>
             </div>
         </section>
 
@@ -181,78 +496,208 @@
             <div class="section-header">
                 <h2>Featured Collections</h2>
                 <div class="divider-gold"></div>
+                <p>Handpicked for you</p>
             </div>
             <div class="product-grid" id="featuredCollections"></div>
+        </section>
+
+        <!-- Recently Viewed -->
+        <section id="recentlyViewedSection" style="display:none;">
+            <div class="rv-strip">
+                <div class="section-header" style="text-align:left;margin-bottom:14px;">
+                    <h2 style="font-size:1.4rem;">Recently Viewed</h2>
+                </div>
+                <div class="rv-scroll" id="recentlyViewedGrid"></div>
+            </div>
         </section>
 
         <!-- Popular Brands -->
         <section class="section-container">
             <div class="section-header">
-                <h2>Popular Brands</h2>
+                <h2>Shop on Your Favourite Stores</h2>
                 <div class="divider-gold"></div>
+                <p>All products link directly to trusted platforms</p>
             </div>
-            <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;" id="brandList">
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">H&M</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Zara</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">MANGO</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Forever 21</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Lakmé</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Maybelline</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">Biba</span>
-                <span class="glass-card" style="padding:16px 24px;font-weight:600;">W</span>
+            <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+                <span class="glass-card" style="padding:14px 26px;font-weight:700;cursor:pointer;" onclick="window.filterByStore('Amazon')"><i class="fab fa-amazon" style="color:#ff9900;margin-right:6px;"></i>Amazon</span>
+                <span class="glass-card" style="padding:14px 26px;font-weight:700;cursor:pointer;" onclick="window.filterByStore('Flipkart')"><i class="fas fa-shopping-cart" style="color:#2874f0;margin-right:6px;"></i>Flipkart</span>
+                <span class="glass-card" style="padding:14px 26px;font-weight:700;cursor:pointer;" onclick="window.filterByStore('Myntra')"><i class="fas fa-tshirt" style="color:#ff3f6c;margin-right:6px;"></i>Myntra</span>
+                <span class="glass-card" style="padding:14px 26px;font-weight:700;cursor:pointer;" onclick="window.filterByStore('Nykaa')"><i class="fas fa-star" style="color:#fc2779;margin-right:6px;"></i>Nykaa</span>
+                <span class="glass-card" style="padding:14px 26px;font-weight:700;cursor:pointer;" onclick="window.filterByStore('Ajio')"><i class="fas fa-gem" style="color:#e87722;margin-right:6px;"></i>Ajio</span>
             </div>
         </section>
 
         <!-- Newsletter -->
         <section class="section-container">
             <div class="newsletter-section">
-                <h2 style="font-family:'Playfair Display',serif;">Join the Radiance Club</h2>
-                <p style="color:var(--text-muted);">Get exclusive deals, style tips & early access to sales.</p>
+                <h2 style="font-family:'Playfair Display',serif;">Join the Radiance Club 💌</h2>
+                <p style="color:var(--text-muted);">Get <strong style="color:var(--accent-gold);">exclusive deals</strong>, early access to flash sales &amp; style tips delivered weekly.</p>
+                <p style="font-size:.75rem;color:var(--text-muted);margin-top:4px;">Join <strong>12,000+</strong> fashion-forward women already subscribed.</p>
                 <div class="newsletter-input-group">
                     <input type="email" placeholder="Your email address" id="newsletterEmail">
-                    <button class="btn-gold" id="newsletterBtn">Subscribe</button>
+                    <button class="btn-gold" id="newsletterBtn"><i class="fas fa-paper-plane"></i> Subscribe</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Radiance & Ruche</h4>
-                <p style="color:var(--text-muted);font-size:0.85rem;">Your premium destination for curated women's fashion. We connect you with the best products through trusted affiliate partners.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+    <!-- ===== PREMIUM FOOTER ===== -->
+    <footer class="pf-footer" id="siteFooter">
+
+        <!-- Top wave divider -->
+        <div class="pf-wave" aria-hidden="true">
+            <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="var(--pf-bg)"/>
+            </svg>
+        </div>
+
+        <div class="pf-inner">
+
+            <!-- Row 1: Brand + Newsletter -->
+            <div class="pf-top">
+                <!-- Brand -->
+                <div class="pf-brand-col">
+                    <div class="pf-logo">Radiance &amp; Ruche</div>
+                    <p class="pf-tagline">Your curated destination for premium women's fashion, beauty &amp; lifestyle.</p>
+                    <div class="pf-trust-row">
+                        <span class="pf-trust-badge"><i class="fas fa-shield-alt"></i> 100% Authentic</span>
+                        <span class="pf-trust-badge"><i class="fas fa-truck"></i> Free Delivery</span>
+                        <span class="pf-trust-badge"><i class="fas fa-undo"></i> Easy Returns</span>
+                    </div>
+                    <!-- Social Links -->
+                    <div class="pf-social">
+                        <a href="#" class="pf-social-btn pf-instagram" aria-label="Instagram" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="pf-social-btn pf-pinterest" aria-label="Pinterest" title="Pinterest">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                        <a href="#" class="pf-social-btn pf-facebook" aria-label="Facebook" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="pf-social-btn pf-twitter" aria-label="X / Twitter" title="X / Twitter">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="#" class="pf-social-btn pf-youtube" aria-label="YouTube" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="pf-newsletter-col">
+                    <div class="pf-nl-card">
+                        <div class="pf-nl-icon"><i class="fas fa-envelope-open-text"></i></div>
+                        <h3 class="pf-nl-title">Join the Radiance Club 💌</h3>
+                        <p class="pf-nl-desc">Get <strong>exclusive deals</strong>, early sale access &amp; style tips. Join <strong>12,000+</strong> subscribers.</p>
+                        <form class="pf-nl-form" onsubmit="footerSubscribe(event)">
+                            <input type="email" id="footerEmail" placeholder="Your email address" autocomplete="email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                        </form>
+                        <p class="pf-nl-note"><i class="fas fa-lock"></i> No spam. Unsubscribe anytime.</p>
+                    </div>
                 </div>
             </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
-                <a href="#">Blog</a>
-                <a href="#">Careers</a>
+
+            <!-- Divider -->
+            <div class="pf-divider"></div>
+
+            <!-- Row 2: Link columns -->
+            <div class="pf-links-row">
+
+                <!-- Company -->
+                <div class="pf-col">
+                    <h4 class="pf-col-title"><i class="fas fa-building"></i> Company</h4>
+                    <ul class="pf-link-list">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Our Story</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog &amp; Style Tips</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Press &amp; Media</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Partner With Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Help Center -->
+                <div class="pf-col">
+                    <h4 class="pf-col-title"><i class="fas fa-headset"></i> Help Center</h4>
+                    <ul class="pf-link-list">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Support</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Track Your Order</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Size Guide</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Product Care</a></li>
+                        <li><a href="mailto:hello@radianceandruche.com"><i class="fas fa-envelope"></i> hello@radianceandruche.com</a></li>
+                    </ul>
+                </div>
+
+                <!-- Policies -->
+                <div class="pf-col">
+                    <h4 class="pf-col-title"><i class="fas fa-file-alt"></i> Policies</h4>
+                    <ul class="pf-link-list">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Returns &amp; Refunds</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Affiliate Disclosure</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms &amp; Conditions</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cookie Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Shop Quick Links -->
+                <div class="pf-col">
+                    <h4 class="pf-col-title"><i class="fas fa-shopping-bag"></i> Shop</h4>
+                    <ul class="pf-link-list">
+                        <li><a href="#trending"><i class="fas fa-chevron-right"></i> Trending Now</a></li>
+                        <li><a href="#deals"><i class="fas fa-chevron-right"></i> Today's Deals</a></li>
+                        <li><a href="#categories"><i class="fas fa-chevron-right"></i> All Categories</a></li>
+                        <li><a href="#collections"><i class="fas fa-chevron-right"></i> Collections</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> New Arrivals</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Best Sellers</a></li>
+                    </ul>
+                </div>
+
             </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Affiliate Disclosure</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Cookie Policy</a>
+
+            <!-- Divider -->
+            <div class="pf-divider"></div>
+
+            <!-- Row 3: Payment / Delivery badges -->
+            <div class="pf-badges-row">
+                <div class="pf-badges-label">Secure Checkout via:</div>
+                <div class="pf-badges">
+                    <span class="pf-badge"><i class="fab fa-amazon"></i> Amazon</span>
+                    <span class="pf-badge"><i class="fas fa-shopping-cart"></i> Flipkart</span>
+                    <span class="pf-badge"><i class="fas fa-tshirt"></i> Myntra</span>
+                    <span class="pf-badge"><i class="fas fa-star"></i> Nykaa</span>
+                    <span class="pf-badge"><i class="fas fa-gem"></i> Ajio</span>
+                    <span class="pf-badge pf-badge-secure"><i class="fas fa-lock"></i> SSL Secured</span>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <a href="mailto:hello@radianceandruche.com">hello@radianceandruche.com</a>
-                <a href="#">Support Center</a>
-                <a href="#">Partner With Us</a>
+
+            <!-- Divider -->
+            <div class="pf-divider"></div>
+
+            <!-- Copyright -->
+            <div class="pf-copyright">
+                <div class="pf-copy-left">
+                    <span>&copy; 2026 <strong>Radiance &amp; Ruche</strong>. All rights reserved.</span>
+                </div>
+                <div class="pf-copy-center">
+                    <i class="fas fa-heart" style="color:var(--accent-burgundy);"></i> Made with love for fashion-forward women
+                </div>
+                <div class="pf-copy-right">
+                    <span>As an affiliate partner, we may earn commissions on qualifying purchases. <a href="#" class="pf-copy-link">Disclosure</a></span>
+                </div>
             </div>
+
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Radiance & Ruche. All rights reserved. | As an affiliate, we may earn commissions from qualifying purchases.</p>
-        </div>
+
+        <!-- Back to top -->
+        <button class="pf-back-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
     </footer>
 
     <!-- Mobile Bottom Navigation -->
@@ -262,10 +707,10 @@
             <a href="#trending"><i class="fas fa-fire"></i><span>Trending</span></a>
             <a href="#categories"><i class="fas fa-th-large"></i><span>Shop</span></a>
             <a href="#deals"><i class="fas fa-tag"></i><span>Deals</span></a>
-            <a href="#" id="mobileWishlist"><i class="fas fa-heart"></i><span>Saved</span></a>
+            <a href="#" id="mobileWishlist" onclick="openWishlistPanel();return false;"><i class="fas fa-heart"></i><span>Saved</span></a>
         </div>
     </nav>
 
-    <script src="script.js">    </script>
+    <script src="script.js"></script>
 </body>
 </html>
